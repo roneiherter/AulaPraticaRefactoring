@@ -1,7 +1,7 @@
 public class Movie {
-    public static final int CHILDRENS = 2;
     public static final int REGULAR = 0;
     public static final int NEW_RELEASE = 1;
+    public static final int CHILDRENS = 2;
 
     private String _title;
     private int _priceCode;
@@ -15,8 +15,8 @@ public class Movie {
         return _priceCode;
     }
 
-    public void setPriceCode(int arg) {
-        _priceCode = arg;
+    public void setPriceCode(int code) {
+        _priceCode = code;
     }
 
     public String getTitle() {
