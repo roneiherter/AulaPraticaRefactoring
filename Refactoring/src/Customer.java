@@ -2,49 +2,49 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 public class Customer {
-   private String _name;
-   private Vector _rentals = new Vector();
+    private String _name;
+    private Vector _rentals = new Vector();
 
-   public Customer(String name){
-      _name = name;
-   }
+    public Customer(String name) {
+        _name = name;
+    }
 
-   public void addRental(Rental arg) {
-      _rentals.addElement(arg);
-   }
-   
-   public String getName(){
-      return _name;
-   }
+    public void addRental(Rental arg) {
+        _rentals.addElement(arg);
+    }
 
-   public String statement() {
-      double totalAmount = 0;
-      int frequentRenterPoints = 0;
-      Enumeration rentals = _rentals.elements();
-      String result = "Rental Record for " + getName() + "\n";
+    public String getName() {
+        return _name;
+    }
 
-      while (rentals.hasMoreElements()) {
-         Rental each = (Rental) rentals.nextElement();
+    // -----------------------------------
+    // Statement atualizado após refactoring
+    // -----------------------------------
+    public String statement() {
+        double totalAmount = 0;
+        int frequentRenterPoints = 0;
+        Enumeration rentals = _rentals.elements();
+        String result = "Rental Record for " + getName() + "\n";
 
-         // add frequent renter points
-         frequentRenterPoints++;
-         if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
-             each.getDaysRented() > 1)
-            frequentRenterPoints++;
+        while (rentals.hasMoreElements()) {
 
-         // show figures for this rental (thisAmount removido)
-         result += "\t" + each.getMovie().getTitle() + "\t" +
-                   String.valueOf(each.getCharge()) + "\n";
+            Rental each = (Rental) rentals.nextElement();
 
-         // totalAmount agora usa getCharge direto
-         totalAmount += each.getCharge();
-      }
+            // Novo método em Rental
+            frequentRenterPoints += each.getFrequentRenterPoints();
 
-      // add footer lines
-      result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-      result += "You earned " + String.valueOf(frequentRenterPoints) +
-                " frequent renter points";
+            // Usa getCharge() no lugar de variável temporária
+            result += "\t" + each.getMovie().getTitle() + "\t"
+                    + String.valueOf(each.getCharge()) + "\n";
 
-      return result;
-   }
+            totalAmount += each.getCharge();
+        }
+
+        // Rodapé
+        result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
+        result += "You earned " + String.valueOf(frequentRenterPoints)
+                + " frequent renter points";
+
+        return result;
+    }
 }
