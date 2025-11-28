@@ -1,4 +1,5 @@
 public class Movie {
+
     public static final int REGULAR = 0;
     public static final int NEW_RELEASE = 1;
     public static final int CHILDRENS = 2;
@@ -7,46 +8,33 @@ public class Movie {
     private int _priceCode;
 
     public Movie(String title, int priceCode) {
-        _title = title;
-        _priceCode = priceCode;
+        this._title = title;
+        this._priceCode = priceCode;
     }
 
     public int getPriceCode() {
         return _priceCode;
     }
 
-    public void setPriceCode(int code) {
-        _priceCode = code;
+    public void setPriceCode(int priceCode) {
+        this._priceCode = priceCode;
     }
 
     public String getTitle() {
         return _title;
     }
 
-    // ------------------------------------------
-    // NOVO MÉTODO COM O CÓDIGO EXTRAÍDO
-    // ------------------------------------------
-    public double getCharge(int daysRented) {
-        double result = 0;
+    // Novo método contendo o cálculo extraído
+    public int getFrequentRenterPoints(int daysRented) {
 
-        switch (getPriceCode()) {
-            case REGULAR:
-                result += 2;
-                if (daysRented > 2)
-                    result += (daysRented - 2) * 1.5;
-                break;
+        // Regra clássica do livro Refactoring:
+        // ➜ Filmes lançamentos (NEW_RELEASE) dão 2 pontos se alugados por mais de 1 dia
 
-            case NEW_RELEASE:
-                result += daysRented * 3;
-                break;
-
-            case CHILDRENS:
-                result += 1.5;
-                if (daysRented > 3)
-                    result += (daysRented - 3) * 1.5;
-                break;
+        if (_priceCode == NEW_RELEASE && daysRented > 1) {
+            return 2;
         }
 
-        return result;
+        // Caso contrário, sempre 1 ponto
+        return 1;
     }
 }
