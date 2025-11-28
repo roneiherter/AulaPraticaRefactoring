@@ -1,14 +1,14 @@
 public class Movie {
 
-    public static final int CHILDRENS = 2;
     public static final int REGULAR = 0;
-    public static final int NEW_RELEASE = 1;
+    public static final int CHILDRENS = 1;
+    public static final int NEW_RELEASE = 2;
 
     private String _title;
     private Price _price;
 
-    public Movie(String title, int priceCode) {
-        this._title = title;
+    public Movie(String name, int priceCode) {
+        _title = name;
         setPriceCode(priceCode);
     }
 
@@ -36,11 +36,11 @@ public class Movie {
         }
     }
 
-    // Agora delega completamente para Price
     public double getCharge(int daysRented) {
         return _price.getCharge(daysRented);
     }
 
+    // 🔥 Atualizado no Passo 6
     public int getFrequentRenterPoints(int daysRented) {
         return _price.getFrequentRenterPoints(daysRented);
     }
