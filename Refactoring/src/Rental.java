@@ -8,15 +8,20 @@ public class Rental {
         this._daysRented = daysRented;
     }
 
-    public Movie getMovie() {
-        return _movie;
-    }
-
     public int getDaysRented() {
         return _daysRented;
     }
 
-    // Método antigo agora só delega para Movie
+    public Movie getMovie() {
+        return _movie;
+    }
+
+    // Agora delega para Movie
+    public double getCharge() {
+        return _movie.getCharge(_daysRented);
+    }
+
+    // Agora delega para Movie
     public int getFrequentRenterPoints() {
         return _movie.getFrequentRenterPoints(_daysRented);
     }
