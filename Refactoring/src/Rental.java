@@ -4,8 +4,8 @@ public class Rental {
     private int _daysRented;
 
     public Rental(Movie movie, int daysRented) {
-        this._movie = movie;
-        this._daysRented = daysRented;
+        _movie = movie;
+        _daysRented = daysRented;
     }
 
     public int getDaysRented() {
@@ -16,12 +16,10 @@ public class Rental {
         return _movie;
     }
 
-    // Agora delega para Movie
     public double getCharge() {
         return _movie.getCharge(_daysRented);
     }
 
-    // Agora delega para Movie
     public int getFrequentRenterPoints() {
         return _movie.getFrequentRenterPoints(_daysRented);
     }

@@ -4,9 +4,8 @@ public abstract class Price {
 
     public abstract double getCharge(int daysRented);
 
-    // Aqui está a lógica extraída do Movie.getFrequentRenterPoints()
+    // Versão genérica
     public int getFrequentRenterPoints(int daysRented) {
-        // Regra padrão: 1 ponto
         return 1;
     }
 }

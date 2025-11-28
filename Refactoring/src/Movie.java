@@ -1,8 +1,8 @@
 public class Movie {
 
     public static final int REGULAR = 0;
-    public static final int CHILDRENS = 1;
-    public static final int NEW_RELEASE = 2;
+    public static final int NEW_RELEASE = 1;
+    public static final int CHILDRENS = 2;
 
     private String _title;
     private Price _price;
@@ -20,8 +20,8 @@ public class Movie {
         return _price.getPriceCode();
     }
 
-    public void setPriceCode(int arg) {
-        switch (arg) {
+    public void setPriceCode(int priceCode) {
+        switch (priceCode) {
             case REGULAR:
                 _price = new RegularPrice();
                 break;
@@ -32,15 +32,16 @@ public class Movie {
                 _price = new NewReleasePrice();
                 break;
             default:
-                throw new IllegalArgumentException("Incorrect Price Code");
+                throw new IllegalArgumentException("Invalid Price Code");
         }
     }
 
+    // delega para Price
     public double getCharge(int daysRented) {
         return _price.getCharge(daysRented);
     }
 
-    // 🔥 Atualizado no Passo 6
+    // delega para Price
     public int getFrequentRenterPoints(int daysRented) {
         return _price.getFrequentRenterPoints(daysRented);
     }
